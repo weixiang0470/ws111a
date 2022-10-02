@@ -1,0 +1,31 @@
+<!DOCTYPE>
+<html lang="en-US">
+    <head>    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>XIANG</title>
+        <style>
+            body {
+                text-align: center;
+                background-color: black;
+                color:aliceblue;
+            }
+            textarea {
+                width: 30vw;
+                height: 10vw;
+                padding: 15px;
+                font-size: large;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>New Work</h1>
+        <form action="/post" method="post">
+          <p><input type="date" name="date"></p>
+          <p><input type="text" placeholder="Title" name="title"></p>
+          <hr>
+          <p><textarea placeholder="Contents" name="work"></textarea></p>
+          <p><input type="submit" value="Create"></p>
+        </form>
+    </body>
+</html>
