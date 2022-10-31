@@ -1,0 +1,13 @@
+<%- header %>
+    <h1>Posts</h1>
+    <p>Total have <strong><%= posts.length%></strong> posts!</p>
+    <p><a href="/new">Create new post</a></p>
+    <ul>
+        <% for (let i of posts){%>
+        <li>
+            <h2><%= i[1] %></h2>
+            <p><a href="/post/<%=i[0]%>">Read post</a> or <a href="/del/<%=i[0]%>">Delete post</a></p>
+        </li>
+        <% } %>
+    </ul>
+<%- footer %>

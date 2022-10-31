@@ -1,0 +1,43 @@
+body {
+    /*text-align: center;*/
+    background-color: black;
+    color:aliceblue;
+}
+#CommandArea {
+    width: 30vw;
+    height: 4vw;
+    padding: 15px;
+    font-size: large;
+    /*position: absolute;*/
+}
+#ResultArea {
+    /*display: inline-block;*/
+    height: auto;
+    width: max-content;
+    padding: 15px;
+    font-size: large;
+    background-color: white;
+    color:black;
+}
+button{
+    width: 100px;
+    font-size: large;
+}
+#tl{
+    text-align: center;
+}
+#SQLArea{
+    margin-right: 15px;
+    font-size: large;
+    background-color: white;
+    color:black;
+    height: auto;
+    width: auto;
+    padding: 15px;
+}
+#SQLForm{
+    text-align: center;
+    position: absolute;
+    top: 70px;
+    right: 1vw;
+}
