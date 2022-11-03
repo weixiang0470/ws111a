@@ -4,7 +4,7 @@ body {
     color:aliceblue;
 }
 #CommandArea {
-    width: 30vw;
+    width: 52vw;
     height: 4vw;
     padding: 15px;
     font-size: large;
@@ -13,7 +13,7 @@ body {
 #ResultArea {
     /*display: inline-block;*/
     height: auto;
-    width: max-content;
+    max-width: 50vw;
     padding: 15px;
     font-size: large;
     background-color: white;
@@ -34,6 +34,15 @@ button{
     height: auto;
     width: auto;
     padding: 15px;
+}
+#SqlTable{
+    color: black;
+    font-weight: bold;
+}
+th, td {
+    padding-left: 15px;
+    padding-right: 15px;
+    border:2px solid black;
 }
 #SQLForm{
     text-align: center;

@@ -1,4 +1,4 @@
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { Application, Router,send } from "https://deno.land/x/oak/mod.ts";
 import { DB } from "https://deno.land/x/sqlite/mod.ts";
 import {
   viewEngine,
@@ -10,6 +10,7 @@ import {
 
 const db = new DB("Blog.db");
 db.query("CREATE TABLE IF NOT EXISTS blogs(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT)");
+//"DROP TABLE blogs"
 /*let count = db.query("SELECT id from blogs");
 for(let x of count){
     db.query("DELETE id, title, content from blogs where id = VALUES(?)",[`${x}`]);
@@ -20,7 +21,9 @@ router.get('/',list)
   .get('/new',createpage)
   .post('/create',addpost)
   .get('/post/:id',show)
-  .get('/del/:id',del);
+  .get('/del/:id',del)
+  .get('/renew',renew);
+  //.get('/public/',pub);
   //.get('/post/create')
 //const ejsEngine = engineFactory.getEjsEngine();
 //const oakAdapter = adapterFactory.getOakAdapter();
@@ -28,9 +31,17 @@ const server = new Application;
 server.use(viewEngine(oakAdapter, dejsEngine));
 server.use(router.routes());
 server.use(router.allowedMethods());
+server.use(async (ctx) => {
+  console.log('path=', ctx.request.url.pathname)
+  await send(ctx, ctx.request.url.pathname, {
+    // root: `${Deno.cwd()}/public/`,
+    root: Deno.cwd(),
+    index: "index.html",
+  });
+});
 
 db.query("INSERT INTO blogs (title, content) VALUES (?, ?)", ["aaa","aaaaa"]);
-db.query("INSERT INTO blogs (title, content) VALUES (?, ?)", ["bbb","bbbbb"]);
+//db.query("INSERT INTO blogs (title, content) VALUES (?, ?)", ["bbb","bbbbb"]);
 const header = `<!DOCTYPE html><html lang="en-US"><head>
 <title>Xiang~Blog</title>
 <link rel="stylesheet" type="text/css" href="../main.css">
@@ -45,6 +56,14 @@ async function list(ctx){
   //ctx.render("public/list.ejs",{posts});
   //ctx.render("public/list.ejs",{footer});
 }
+
+/*async function pub(ctx) {
+  console.log('path=', ctx.request.url.pathname)
+  await send(ctx, ctx.request.url.pathname, {
+    root: `${Deno.cwd()}`,
+    index: "",
+  })
+}*/
 
 function show(ctx){
   try{
@@ -90,6 +109,11 @@ async function addpost(ctx){
     console.log("addpost Error");
   }
 
+}
+async function renew(ctx){
+  await db.query("DROP TABLE blogs");
+  db.query("CREATE TABLE IF NOT EXISTS blogs(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT)");
+  ctx.response.redirect('/');
 }
 //let testing = db.query("SELECT id, title, content from blogs");
 //console.log("DB : ",testing);

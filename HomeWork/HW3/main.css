@@ -2,5 +2,15 @@ body{
   background-color: black;
   color: aliceblue;
   padding: 80px;
-  font: 25px;
+  font: 40px;
+}
+h1{
+  font-size: 3.5vw;
+}
+strong{
+  font-weight: bolder;
+  font-size: 2vw;
+}
+p{
+  font-size: 1.5vw;
 }
