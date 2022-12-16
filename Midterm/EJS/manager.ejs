@@ -1,0 +1,43 @@
+<%- await include('EJS/header.ejs') %>
+<style>
+    #AddOnForm{
+        position: relative;
+        left: 670px;
+        bottom: 532px;
+        max-width: 500px;
+        text-align: center;
+    }
+    #ProductForm{
+        position: relative;
+        left: 70px;
+        max-width: 500px;
+        text-align: center;
+    }
+</style>
+<a style="position: relative;left: 48%;top: 50px;" href="/">Home</a>
+<hr>
+<div id="Manager_Edit">
+<!--<textarea style="width:500px;height:500px;" id="products_test" readonly>-->
+    <form id="ProductForm" method="post" action="/changePro">
+        <textarea style="width:500px;height:500px;" name="content">
+        <% for(let i of Prots2) {%>
+            <%= i.name %>:<%= i.price %>;
+        <% } %>
+        </textarea>
+        <button >Save</button>
+    </form>
+    <form id="AddOnForm" method="post" action="/changeAdd">
+        <textarea style="width:500px;height:500px;"name="content">
+        <% for(let i of AddOn2) {%>
+            <%= i.name %>:<%= i.price %>;
+        <% } %>
+        </textarea>
+        <button>Save</button>
+    </form>
+   <!-- <% for(let i of Prots2) {%>
+        <%= i %>
+    <% } %>-->
+
+</div>
+</body>
+<%- await include('EJS/footer.ejs') %>

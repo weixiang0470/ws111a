@@ -95,9 +95,11 @@ async function addpost(ctx){
   try{
     if (body.type === "form"){
       const value = await body.value;
-      //console.log("Value : ",value);
+      console.log("Value : ",value);
       const post = {}
       for( const [title,content] of value){
+        console.log("T",title);
+        console.log("C",content);
         post[title]=content;
       }
       console.log("post : ",post.title);
