@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Let's Drink~</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="Home.css">
+</head>
+<div id="id01" class="modal">
+    <form id="LoginForm" class="modal-content animate" method="post" action="/login">
+        <h1>&#9775Login&#9775</h1>
+        <hr style="width:100%;margin-top:5px;border-radius:5px;">
+        <div class="container">
+            <input class="inpcls" type="text" placeholder="Username" name="uname" required><br>
+            <input class="inpcls" type="password" placeholder="Password" name="psw" required><br>
+            <button class="subid" tpye="submit" >Login</button>
+        </div>
+    </form>
+</div>
+<body>
+    <div>
+        <img style="width:90px;height:90px;background-image:radial-gradient(circle,white, black);margin:-8px;" id="whoID" src="../Images/guest.png">
+        <button id="LoginIcon" onclick="ShowLogin()">Login</button>
+        <hr style="position:absolute;width:99.9%;margin:5px;margin-left:0;margin-right:0;left:0;">
+    </div>
+</body>
+<script src="Home.js"></script>
+
+</html>

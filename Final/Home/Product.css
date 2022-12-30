@@ -1,0 +1,41 @@
+.row {
+    display: flex;
+    margin-left:-5px;
+    margin-right:-5px;
+}
+  
+.column {
+    flex:10;
+    padding: 10px;
+}
+
+#product_area{
+    width: 100px;
+    height: fit-content;
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 50px;
+    color: black;
+    font-weight: bold;
+}
+label{
+    width: 200px;
+    height: 70px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border:2px solid black;
+    text-align: left;
+}
+/*label{
+    width: 70px;
+    border:2px solid black;
+    text-align: left;
+}*/
+#order_place{
+    position: absolute;
+    font-size: larger;
+    width: 500px;
+    height: auto;
+    margin-left: 200px;
+    top: 150px;
+}

@@ -1,0 +1,80 @@
+<%- await include('EJS/header.ejs') %>
+<div id="id01" class="modal">
+    <form id="LoginForm" class="modal-content animate" method="post" action="/login">
+        <h1>&#9775Login&#9775</h1>
+        <hr style="width:100%;margin-top:5px;border-radius:5px;">
+        <div class="container">
+            <input class="inpcls" type="text" placeholder="Username" name="uname" required><br>
+            <input class="inpcls" type="password" placeholder="Password" name="psw" required><br>
+            <button class="subid" tpye="submit" >Login</button>
+        </div>
+    </form>
+</div>
+<div>
+<img style="width:90px;height:90px;background-image:radial-gradient(circle,white, black);margin:-8px;" id="whoID" src="../Images/guest.png">
+<button id="LoginIcon" onclick="ShowLogin()">Login</button>
+<a href="/edit" style="right:47%;position:absolute;top:40px;display:none;" id="ManagerLink">Go Edit</a>
+<a href="/" style="right:47%;position:absolute;top:65px;display:none;" id="Statistic">Statistic</a>
+<hr style="position:absolute;width:99.9%;margin:5px;margin-left:0;margin-right:0;left:0;">
+</div>
+
+<div id="product_area">
+    <div class="row">
+        <form>
+            <div class="column">
+            <label>飲料</label><br>
+            <div id="Drink_div"></div>
+        </div>
+        <div class="column">
+            <label>加料</label><br>
+            <div id="AddOn_div"></div>
+        </div>
+        <div class="column">
+                <label>甜度</label><br>
+                <input type="radio" name="sugar" value="全糖">全糖<br>
+                <input type="radio" name="sugar" value="少糖">少糖<br>
+                <input type="radio" name="sugar" value="半糖">半糖<br>
+                <input type="radio" name="sugar" value="微糖">微糖<br>
+                <input type="radio" name="sugar" value="無糖">無糖<br>
+        </div>
+        <div class="column">
+                <label>冰塊</label><br>
+                <input type="radio" name="ice" value="正常">正常<br>
+                <input type="radio" name="ice" value="少冰">少冰<br>
+                <input type="radio" name="ice" value="微冰">微冰<br>
+                <input type="radio" name="ice" value="去冰">去冰<br>
+                <input type="radio" name="ice" value="熱">熱<br>
+        </div>
+        <div>
+            <button onclick="add()" style="font-size:larger;">Add</button>
+        </div>
+        </form>
+    </div>
+</div>
+<div id="order_place" style="font-size: larger;font-weight: bolder;">購物車<br>
+    <div id="orderlist"></div>
+    <button type="submit" onclick="send()">Send</button>
+</div>
+</body>
+<script>
+    window.addEventListener("load", (event) => {
+        WHO();
+    });
+</script>
+<%- await include('EJS/footer.ejs') %>
+    
+<!--<table class="product_table">
+    <tr><th>Sugar</th></tr>
+    <tr><td><input type="radio" name="sugar" value="Full"><label>全糖</label></td></tr>
+    <tr><td><input type="radio" name="sugar" value="75%"><label>少糖</label></td></tr>
+    <tr><td><input type="radio" name="sugar" value="Full"><label>全糖</label></td></tr>
+</table>
+<table class="product_table">
+    <tr><th>Ice</th></tr>
+</table>
+<table class="product_table">
+    <tr><th>Add on</th></tr>
+</table>
+<table class="product_table">
+    <tr><th>Price</th></tr>
+</table>-->
