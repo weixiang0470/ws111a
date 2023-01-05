@@ -1,6 +1,7 @@
 import { Application, Router,send } from "https://deno.land/x/oak/mod.ts";
 import { DB } from "https://deno.land/x/sqlite/mod.ts";
 import { Session } from "https://deno.land/x/oak_sessions/mod.ts";
+import * as render from "./render.js";
 import {
   viewEngine,
   oakAdapter,
@@ -40,7 +41,8 @@ router.get('/', home)
     .post('/changePro',changePro)
     .post('/changeAdd',changeAdd)
     .get('/homeproducts',homeproducts)
-    .get('/save/:All',save);
+    .get('/save/:All',save)
+    .get('/statistic',statistic);
 
 const server = new Application;
 server.use(viewEngine(oakAdapter, dejsEngine));
@@ -97,12 +99,12 @@ async function login(ctx) {
 db.query("CREATE TABLE IF NOT EXISTS statistic_product (name TEXT)");
 db.query("CREATE TABLE IF NOT EXISTS statistic_addon (name TEXT)");
 db.query("CREATE TABLE IF NOT EXISTS statistic_money (money INTEGER)");
-let test96 = db.query("SELECT * FROM statistic_product");
-let test95 = db.query("SELECT * FROM statistic_addon");
-let test94 = db.query("SELECT * FROM statistic_money");
-console.log(test96);
-console.log(test95);
-console.log(test94);
+//let test96 = db.query("SELECT * FROM statistic_product");
+//let test95 = db.query("SELECT * FROM statistic_addon");
+//let test94 = db.query("SELECT * FROM statistic_money");
+//console.log(test96);
+//console.log(test95);
+//console.log(test94);
 async function save(ctx){
     const data = ctx.params['All'];
     let data2 = data.split(",");
@@ -124,14 +126,66 @@ async function save(ctx){
     }
     ctx.response.type = 'application/json';
     ctx.response.body="OK";
-    let test96 = db.query("SELECT * FROM statistic_product");
-    let test95 = db.query("SELECT * FROM statistic_addon");
-    let test94 = db.query("SELECT * FROM statistic_money");
-    console.log(test96);
-    console.log(test95);
-    console.log(test94);
     }
 }
+async function statistic(ctx){
+    let who = await ctx.state.session.get('who');
+
+    if(who!='manager'){
+        ctx.response.redirect('/');
+    }
+    else{
+        let drinks = db.query("SELECT * FROM products");
+        let addon = db.query("SELECT * FROM addon");
+        let money = db.query("SELECT * FROM statistic_money");
+        //console.log(drinks[0][0]);
+        let Sta_drink =[];
+        for(let i of drinks){
+            let temp = db.query("SELECT * FROM statistic_product WHERE name = ?",[i[0]]);
+            let arr=[];
+            arr.push(i[0]);
+            arr.push(temp.length);
+            Sta_drink.push(arr);
+        }
+        let Sta_addon = [];
+        for(let i of addon){
+            let temp = db.query("SELECT * FROM statistic_addon WHERE name = ?",[i[0]]);
+            let arr=[];
+            arr.push(i[0]);
+            arr.push(temp.length);
+            Sta_addon.push(arr);
+        }
+        let total = 0;
+        for(let i of money){
+            //console.log(i[0]);
+            try{
+                total += i[0];
+            }
+            catch{
+                total +=0;
+            }
+        }
+        //console.log(Sta_drink);
+        //console.log(Sta_addon);
+        //console.log(total);
+        let drink_area = "";
+        for(let i of Sta_drink){
+            drink_area += `${i[0]} : ${i[1]}<br>`;
+        }
+        let addon_area="";
+        for(let i of Sta_addon){
+            addon_area += `${i[0]} : ${i[1]}<br>`;
+        }
+        let body = `
+        <a style="font-size:30px;" href="/">Home</a>
+        <div style="margin:50px;font-weight:bolder;font-size:larger;">飲料統計區<div style="margin-top: 10px;font-weight:normal;font-size:large;">${drink_area}</div></div>
+        <div style="margin:50px;font-weight:bolder;font-size:larger;">加料統計區<div style="margin-top: 10px;font-weight:normal;font-size:large;">${addon_area}</div></div>
+        <div style="margin:50px;font-weight:bolder;font-size:larger;">總收入為 ${total}元</div>`;
+        ctx.response.type = 'text/html';
+        ctx.response.body = await render.layout(body);
+    }
+}
+
 async function who(ctx){
     if(await ctx.state.session.get('who')==null)await ctx.state.session.set('who','guest');
     let who = await ctx.state.session.get('who');

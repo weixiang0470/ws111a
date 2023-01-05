@@ -14,7 +14,7 @@
 <img style="width:90px;height:90px;background-image:radial-gradient(circle,white, black);margin:-8px;" id="whoID" src="../Images/guest.png">
 <button id="LoginIcon" onclick="ShowLogin()">Login</button>
 <a href="/edit" style="right:47%;position:absolute;top:40px;display:none;" id="ManagerLink">Go Edit</a>
-<a href="/" style="right:47%;position:absolute;top:65px;display:none;" id="Statistic">Statistic</a>
+<a href="/statistic" style="right:47%;position:absolute;top:65px;display:none;" id="Statistic">Statistic</a>
 <hr style="position:absolute;width:99.9%;margin:5px;margin-left:0;margin-right:0;left:0;">
 </div>
 
@@ -51,8 +51,9 @@
         </form>
     </div>
 </div>
-<div id="order_place" style="font-size: larger;font-weight: bolder;">購物車<br>
-    <div id="orderlist"></div>
+<div id="order_place" style="font-size:30px;font-weight:bolder;">點餐區<br>
+    <div id="orderlist" style="font-size:20px;font-weight:normal"></div>
+    <button type="submit" onclick="clear_all()">Clear</button>
     <button type="submit" onclick="send()">Send</button>
 </div>
 </body>

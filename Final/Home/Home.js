@@ -69,11 +69,27 @@ async function WHO(){
     //console.log(products);
     cart.innerHTML=products;
 }
+async function clear_all(){
+    let who = await window.fetch('/who');
+    let who2 = await who.json();
+    console.log("Clear function");
+    if(who2.identity == "guest"){
+        alert("Login first!");
+    }
+    else{
+        localStorage.setItem("product","");
+        WHO();
+    }
 
+}
 async function send(){
-    //const sqlcmd = document.getElementById("CommandArea").value;
-    //let result = await window.fetch(`/cmd/${sqlcmd}`);
-    if(localStorage.getItem("product")==""){
+    let who = await window.fetch('/who');
+    let who2 = await who.json();
+    console.log(who2.identity);
+    if(who2.identity == "guest"){
+        alert("Login first!");
+    }
+    else if(localStorage.getItem("product")==""){
         alert("Empty");
     }
     else{
